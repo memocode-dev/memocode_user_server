@@ -1,14 +1,18 @@
 package dev.memocode.user_server.exception;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+@Slf4j
 @RestControllerAdvice
 public class ApiGlobalExceptionController {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> exception(Exception ex) {
+
+        log.error("서버 에러 발생", ex);
 
         ErrorResponse response = ErrorResponse.builder()
                 .code(500)
