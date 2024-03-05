@@ -1,0 +1,32 @@
+spring:
+  datasource:
+    url: jdbc:mysql://mysql.mysql:3306/farmfarm_user_server_prod
+    username: ENC(/lWpzpR2gCPO/kb+m7DAECV/zf/7rQOqdch14ZdfPZO67+SsAu9YuLh1OixtcPhs)
+    password: ENC(GUhqdgL8r/jbEWozq6kPbBuh1LXutdVD5TB0UvcADVo7PM5SV0ONuR3xaSvT44zM)
+  sql:
+    init:
+      mode: never
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: "https://auth.memocode.dev"
+
+logging:
+  level:
+    org.springframework.security: info
+
+decorator:
+  datasource:
+    p6spy:
+      enable-logging: false
+
+custom:
+  front:
+    domain: "https://memocode.dev"
+  api:
+    domain: "https://api.memocode.dev"
+  auth:
+    domain: "https://auth.memocode.dev"
+    client-id: "1b0f0816-a658-4c33-928c-2d64049560f4"
+    client-secret: "1311719f-9ff4-4ff4-957e-4088128514ee"

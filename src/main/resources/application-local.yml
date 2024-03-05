@@ -1,0 +1,32 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3308/memocode_user_server_dev
+    username: root
+    password: 1234
+  sql:
+    init:
+      mode: always
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: "https://auth.dev.memocode.dev"
+
+logging:
+  level:
+    org.springframework.security: trace
+
+decorator:
+  datasource:
+    p6spy:
+      enable-logging: true
+
+custom:
+  front:
+    domain: "http://localhost:5173"
+  api:
+    domain: "https://api.dev.memocode.dev"
+  auth:
+    domain: "https://auth.dev.memocode.dev"
+    client-id: "8ff2570b-8d6f-4bd9-b342-4b17e5f14d1b"
+    client-secret: "2d4283d2-e8f1-41a6-bef2-a1219826b180"

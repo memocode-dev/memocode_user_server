@@ -1,0 +1,59 @@
+server:
+  port: 9003
+
+spring:
+  profiles:
+    active: local
+
+  ########## JPA ##########
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: "SECRET"
+    username: "SECRET"
+    password: "SECRET"
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+  sql:
+    init:
+      mode: never
+
+  ########## SECURITY ##########
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: "SECRET"
+
+########## CUSTOM ##########
+custom:
+  front:
+    domain: "SECRET"
+  api:
+    domain: "SECRET"
+  auth:
+    domain: "SECRET"
+    client-id: "SECRET"
+    client-secret: "SECRET"
+
+########## LOGGING ##########
+logging:
+  level:
+    org.springframework.security: info
+
+########## DECORATOR ##########
+decorator:
+  datasource:
+    p6spy:
+      enable-logging: false
+
+########## JASYPT ##########
+jasypt:
+  encryptor:
+    password: "SECRET"
+
+########## springdoc ##########
+springdoc:
+  api-docs:
+    path: /users/api-docs
