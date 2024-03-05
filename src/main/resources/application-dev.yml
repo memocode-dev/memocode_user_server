@@ -24,6 +24,7 @@ decorator:
 custom:
   front:
     domain: "http://localhost:5173"
+    domain2: "https://dev.memocode.dev"
   api:
     domain: "https://api.dev.memocode.dev"
   auth:

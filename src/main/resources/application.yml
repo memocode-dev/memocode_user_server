@@ -30,6 +30,7 @@ spring:
 custom:
   front:
     domain: "SECRET"
+    domain2: "SECRET"
   api:
     domain: "SECRET"
   auth:
