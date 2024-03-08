@@ -5,10 +5,10 @@ import dev.memocode.user_server.domain.user.dto.UserInfo;
 import dev.memocode.user_server.domain.user.entity.User;
 import dev.memocode.user_server.domain.user.mapper.UserInfoMapper;
 import dev.memocode.user_server.domain.user.service.UserService;
-import dev.memocode.user_server.domain.user.validation.ValidAccountId;
 import dev.memocode.user_server.event.UserCreatedEvent;
 import dev.memocode.user_server.usecase.UserUseCase;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
@@ -45,7 +45,7 @@ public class UserUseCaseImpl implements UserUseCase {
     }
 
     @Override
-    public UserInfo userInfo(@ValidAccountId UUID accountId) {
+    public UserInfo userInfo(@NotNull(message = "ACCOUNT_ID_NOT_NULL:accountId must not be null") UUID accountId) {
 
         User user = userService.findByAccountIdElseThrow(accountId);
 

@@ -3,9 +3,9 @@ package dev.memocode.user_server.domain.user.service;
 import dev.memocode.user_server.domain.user.dto.UserCreateDTO;
 import dev.memocode.user_server.domain.user.entity.User;
 import dev.memocode.user_server.domain.user.repository.UserRepository;
-import dev.memocode.user_server.domain.user.validation.ValidAccountId;
 import dev.memocode.user_server.exception.GlobalException;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
@@ -54,11 +54,13 @@ public class UserService {
         return findByUsername(username).isPresent();
     }
 
-    public Optional<User> findByAccountId(@ValidAccountId UUID accountId) {
+    public Optional<User> findByAccountId(
+            @NotNull(message = "ACCOUNT_ID_NOT_NULL:accountId must not be null") UUID accountId) {
         return userRepository.findByAccountId(accountId);
     }
 
-    public User findByAccountIdElseThrow(@ValidAccountId UUID accountId) {
+    public User findByAccountIdElseThrow(
+            @NotNull(message = "ACCOUNT_ID_NOT_NULL:accountId must not be null") UUID accountId) {
         return findByAccountId(accountId)
                 .orElseThrow(() -> new GlobalException(USER_NOT_FOUND));
     }
