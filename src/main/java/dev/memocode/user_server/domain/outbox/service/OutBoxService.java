@@ -22,6 +22,7 @@ public class OutBoxService {
     public OutBox createOutBox(@Valid OutBoxCreateDTO dto) {
         OutBox outbox = OutBox.builder()
                 .aggregateId(dto.getAggregateId())
+                .aggregateType(dto.getAggregateType())
                 .eventType(dto.getEventType())
                 .payload(dto.getPayload().toPrettyString())
                 .build();
