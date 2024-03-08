@@ -1,7 +1,7 @@
 package dev.memocode.user_server.usecase;
 
-import dev.memocode.user_server.dto.UserCreateDTO;
-import dev.memocode.user_server.dto.UserInfo;
+import dev.memocode.user_server.domain.user.dto.UserCreateDTO;
+import dev.memocode.user_server.domain.user.dto.UserInfo;
 
 import java.util.List;
 import java.util.UUID;

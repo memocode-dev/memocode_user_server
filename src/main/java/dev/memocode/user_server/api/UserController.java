@@ -1,10 +1,11 @@
 package dev.memocode.user_server.api;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import dev.memocode.user_server.api.spec.UserApi;
-import dev.memocode.user_server.dto.UserCreateDTO;
-import dev.memocode.user_server.dto.UserInfo;
-import dev.memocode.user_server.dto.form.UserCreateForm;
+import dev.memocode.user_server.domain.user.dto.UserCreateDTO;
+import dev.memocode.user_server.domain.user.dto.UserInfo;
+import dev.memocode.user_server.form.UserCreateForm;
 import dev.memocode.user_server.mapper.UserCreateDTOMapper;
 import dev.memocode.user_server.usecase.UserUseCase;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +29,7 @@ public class UserController implements UserApi {
     private static final String ACCOUNT_ID_CLAIM_NAME = "account_id";
 
     @PostMapping
-    public ResponseEntity<Void> createUser(@RequestBody UserCreateForm form, @AuthenticationPrincipal Jwt jwt) {
+    public ResponseEntity<Void> createUser(@RequestBody @Valid UserCreateForm form, @AuthenticationPrincipal Jwt jwt) {
         UserCreateDTO userCreateDTO =
                 userCreateDTOMapper.fromUserCreateFormAndAccountId(form, UUID.fromString(jwt.getClaim(ACCOUNT_ID_CLAIM_NAME)));
 

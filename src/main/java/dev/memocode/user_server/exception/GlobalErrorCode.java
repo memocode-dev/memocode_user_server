@@ -16,6 +16,7 @@ public enum GlobalErrorCode {
     USER_USERNAME_ALREAY_EXISTS(BAD_REQUEST, 10000, "이미 존재하는 username입니다.", INFO),
     USER_ALREAY_EXISTS(BAD_REQUEST, 10001, "이미 존재하는 유저입니다.", INFO),
     USER_NOT_FOUND(NOT_FOUND, 404, "존재하지 않는 유저입니다.", INFO),
+    OUTBOX_NOT_FOUND(NOT_FOUND, 404, "존재하지 않는 outbox입니다.", CRITICAL),
     ;
 
     private final HttpStatus status;

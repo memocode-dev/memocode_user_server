@@ -2,10 +2,13 @@ package dev.memocode.user_server.domain.user.service;
 
 import dev.memocode.user_server.domain.user.entity.User;
 import dev.memocode.user_server.domain.user.repository.UserRepository;
-import dev.memocode.user_server.dto.UserCreateDTO;
+import dev.memocode.user_server.domain.user.validation.ValidAccountId;
+import dev.memocode.user_server.domain.user.dto.UserCreateDTO;
 import dev.memocode.user_server.exception.GlobalException;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,6 +17,7 @@ import java.util.UUID;
 import static dev.memocode.user_server.exception.GlobalErrorCode.*;
 
 @Service
+@Validated
 @RequiredArgsConstructor
 public class UserService {
 
@@ -23,7 +27,7 @@ public class UserService {
         return userRepository.findByUsername(username);
     }
 
-    public User createUser(UserCreateDTO dto) {
+    public User createUser(@Valid UserCreateDTO dto) {
 
         if (isJoined(dto.getAccountId())) {
             throw new GlobalException(USER_ALREAY_EXISTS);
@@ -34,9 +38,9 @@ public class UserService {
         }
 
         User user = User.builder()
-                .accountId(dto.getAccountId())
-                .nickname(dto.getNickname())
                 .username(dto.getUsername())
+                .nickname(dto.getNickname())
+                .accountId(dto.getAccountId())
                 .build();
 
         return userRepository.save(user);
@@ -46,17 +50,17 @@ public class UserService {
         return findByAccountId(accountId).isPresent();
     }
 
-    public Optional<User> findByAccountId(UUID accountId) {
+    private boolean isAlreadyUsername(String username) {
+        return findByUsername(username).isPresent();
+    }
+
+    public Optional<User> findByAccountId(@ValidAccountId UUID accountId) {
         return userRepository.findByAccountId(accountId);
     }
 
-    public User findByAccountIdElseThrow(UUID accountId) {
-        return userRepository.findByAccountId(accountId)
+    public User findByAccountIdElseThrow(@ValidAccountId UUID accountId) {
+        return findByAccountId(accountId)
                 .orElseThrow(() -> new GlobalException(USER_NOT_FOUND));
-    }
-
-    private boolean isAlreadyUsername(String username) {
-        return findByUsername(username).isPresent();
     }
 
     public List<User> findAll() {
