@@ -1,7 +1,7 @@
 package dev.memocode.user_server.domain.user.mapper;
 
-import dev.memocode.user_server.domain.user.entity.User;
 import dev.memocode.user_server.domain.user.dto.UserInfo;
+import dev.memocode.user_server.domain.user.entity.User;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

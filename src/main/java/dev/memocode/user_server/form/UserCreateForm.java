@@ -2,7 +2,6 @@ package dev.memocode.user_server.form;
 
 import dev.memocode.user_server.domain.user.validation.ValidNickname;
 import dev.memocode.user_server.domain.user.validation.ValidUsername;
-import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data

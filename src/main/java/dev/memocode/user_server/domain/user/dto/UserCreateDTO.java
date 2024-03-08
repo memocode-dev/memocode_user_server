@@ -3,8 +3,6 @@ package dev.memocode.user_server.domain.user.dto;
 import dev.memocode.user_server.domain.user.validation.ValidAccountId;
 import dev.memocode.user_server.domain.user.validation.ValidNickname;
 import dev.memocode.user_server.domain.user.validation.ValidUsername;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

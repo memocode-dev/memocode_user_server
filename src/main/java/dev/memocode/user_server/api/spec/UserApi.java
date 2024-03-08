@@ -1,10 +1,10 @@
 package dev.memocode.user_server.api.spec;
 
+import dev.memocode.user_server.domain.user.dto.UserInfo;
+import dev.memocode.user_server.form.UserCreateForm;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import dev.memocode.user_server.domain.user.dto.UserInfo;
-import dev.memocode.user_server.form.UserCreateForm;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.jwt.Jwt;
 

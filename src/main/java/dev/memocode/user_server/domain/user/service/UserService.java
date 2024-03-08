@@ -1,9 +1,9 @@
 package dev.memocode.user_server.domain.user.service;
 
+import dev.memocode.user_server.domain.user.dto.UserCreateDTO;
 import dev.memocode.user_server.domain.user.entity.User;
 import dev.memocode.user_server.domain.user.repository.UserRepository;
 import dev.memocode.user_server.domain.user.validation.ValidAccountId;
-import dev.memocode.user_server.domain.user.dto.UserCreateDTO;
 import dev.memocode.user_server.exception.GlobalException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

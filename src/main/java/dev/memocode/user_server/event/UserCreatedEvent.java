@@ -1,7 +1,6 @@
 package dev.memocode.user_server.event;
 
 import dev.memocode.user_server.domain.user.dto.UserInfo;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
