@@ -1,11 +1,10 @@
-package dev.memocode.user_server.event.listener;
+package dev.memocode.user_server.listener;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.memocode.user_server.domain.outbox.dto.OutBoxCreateDTO;
 import dev.memocode.user_server.domain.outbox.entity.OutBox;
 import dev.memocode.user_server.domain.outbox.service.OutBoxService;
-import dev.memocode.user_server.domain.user.dto.UserInfo;
-import dev.memocode.user_server.event.UserCreatedEvent;
+import dev.memocode.user_server.usecase.event.UserCreatedEvent;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

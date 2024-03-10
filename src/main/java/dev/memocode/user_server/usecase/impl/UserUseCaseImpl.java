@@ -5,7 +5,7 @@ import dev.memocode.user_server.domain.user.dto.UserInfo;
 import dev.memocode.user_server.domain.user.entity.User;
 import dev.memocode.user_server.domain.user.mapper.UserInfoMapper;
 import dev.memocode.user_server.domain.user.service.UserService;
-import dev.memocode.user_server.event.UserCreatedEvent;
+import dev.memocode.user_server.usecase.event.UserCreatedEvent;
 import dev.memocode.user_server.usecase.UserUseCase;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;

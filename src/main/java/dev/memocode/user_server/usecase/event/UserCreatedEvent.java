@@ -1,4 +1,4 @@
-package dev.memocode.user_server.event;
+package dev.memocode.user_server.usecase.event;
 
 import dev.memocode.user_server.domain.user.dto.UserInfo;
 import jakarta.validation.constraints.NotNull;
