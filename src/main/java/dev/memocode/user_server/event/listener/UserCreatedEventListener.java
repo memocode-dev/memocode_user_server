@@ -30,13 +30,11 @@ public class UserCreatedEventListener {
     @EventListener
     public void onUserCreated(@Valid UserCreatedEvent event) {
 
-        UserInfo userInfo = event.getUserInfo();
-
         OutBoxCreateDTO outBoxCreateDTO = OutBoxCreateDTO.builder()
-                .aggregateId(userInfo.getId())
+                .aggregateId(event.getId())
                 .aggregateType(USER)
                 .eventType(USER_CREATED)
-                .payload(objectMapper.valueToTree(userInfo))
+                .payload(objectMapper.valueToTree(event))
                 .build();
 
         OutBox outBox = outboxService.createOutBox(outBoxCreateDTO);

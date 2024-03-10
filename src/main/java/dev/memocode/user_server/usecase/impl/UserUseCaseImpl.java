@@ -37,7 +37,10 @@ public class UserUseCaseImpl implements UserUseCase {
 
         // USER_CREATED 이벤트 발생
         UserCreatedEvent userCreatedEvent = UserCreatedEvent.builder()
-                .userInfo(userInfoMapper.fromUser(user))
+                .id(user.getId())
+                .username(user.getUsername())
+                .nickname(user.getNickname())
+                .accountId(user.getAccountId())
                 .build();
         eventPublisher.publishEvent(userCreatedEvent);
 

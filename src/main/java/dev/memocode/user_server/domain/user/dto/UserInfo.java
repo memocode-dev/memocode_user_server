@@ -11,7 +11,7 @@ import java.util.UUID;
 @Data
 @Builder
 public class UserInfo {
-    @NotNull(message = "ACCOUNT_ID_NOT_NULL:accountId must not be null")
+    @NotNull(message = "USER_ID_NOT_NULL:accountId must not be null")
     private UUID id;
 
     @NotNull(message = "USERNAME_NOT_NULL:Username must not be null")
