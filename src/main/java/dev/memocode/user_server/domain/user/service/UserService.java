@@ -65,11 +65,6 @@ public class UserService implements UserUseCase {
         return userMapper.entityToUserInfo(user);
     }
 
-    private User findByIdElseThrow(UUID userId) {
-        return findById(userId)
-                .orElseThrow(() -> new GlobalException(USER_NOT_FOUND));
-    }
-
     @Override
     public List<UserInfo> findAll() {
         List<User> users = userRepository.findAll();
@@ -91,5 +86,10 @@ public class UserService implements UserUseCase {
 
     private Optional<User> findById(UUID userId) {
         return userRepository.findById(userId);
+    }
+
+    private User findByIdElseThrow(UUID userId) {
+        return findById(userId)
+                .orElseThrow(() -> new GlobalException(USER_NOT_FOUND));
     }
 }
