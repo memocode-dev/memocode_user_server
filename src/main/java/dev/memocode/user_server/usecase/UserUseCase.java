@@ -14,7 +14,7 @@ public interface UserUseCase {
 
     UUID createUser(@Valid UserCreateDTO dto);
 
-    UserInfo userInfo(@NotNull(message = "ACCOUNT_ID_NOT_NULL:accountId must not be null") UUID accountId);
+    UserInfo userInfo(@NotNull(message = "USER_ID_NOT_NULL:userId must not be null") UUID userId);
 
     List<UserInfo> findAll();
 }

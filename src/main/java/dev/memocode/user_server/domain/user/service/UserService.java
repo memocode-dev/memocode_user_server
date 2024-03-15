@@ -11,17 +11,14 @@ import dev.memocode.user_server.usecase.UserUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import static dev.memocode.user_server.domain.exception.GlobalErrorCode.USER_ALREAY_EXISTS;
-import static dev.memocode.user_server.domain.exception.GlobalErrorCode.USER_USERNAME_ALREAY_EXISTS;
+import static dev.memocode.user_server.domain.exception.GlobalErrorCode.*;
 
 @Service
-@Validated
 @RequiredArgsConstructor
 public class UserService implements UserUseCase {
 
@@ -63,7 +60,14 @@ public class UserService implements UserUseCase {
 
     @Override
     public UserInfo userInfo(UUID userId) {
-        return null;
+        User user = findByIdElseThrow(userId);
+
+        return userMapper.entityToUserInfo(user);
+    }
+
+    private User findByIdElseThrow(UUID userId) {
+        return findById(userId)
+                .orElseThrow(() -> new GlobalException(USER_NOT_FOUND));
     }
 
     @Override
