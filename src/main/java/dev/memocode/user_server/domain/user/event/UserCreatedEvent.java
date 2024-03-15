@@ -1,4 +1,4 @@
-package dev.memocode.user_server.domain.user.dto;
+package dev.memocode.user_server.domain.user.event;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -14,7 +14,7 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserCreateDTO {
+public class UserCreatedEvent {
     @NotNull(message = "USER_ID_NOT_NULL:userId must not be null")
     private UUID userId;
 

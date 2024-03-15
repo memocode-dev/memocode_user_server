@@ -4,10 +4,12 @@ import dev.memocode.user_server.domain.user.dto.UserCreateDTO;
 import dev.memocode.user_server.domain.user.dto.UserInfo;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 import java.util.UUID;
 
+@Validated
 public interface UserUseCase {
 
     UUID createUser(@Valid UserCreateDTO dto);

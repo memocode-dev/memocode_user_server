@@ -1,12 +1,15 @@
 package dev.memocode.user_server.domain.user.service;
 
+import dev.memocode.user_server.domain.exception.GlobalException;
 import dev.memocode.user_server.domain.user.dto.UserCreateDTO;
+import dev.memocode.user_server.domain.user.dto.UserInfo;
 import dev.memocode.user_server.domain.user.entity.User;
+import dev.memocode.user_server.domain.user.event.UserCreatedEvent;
+import dev.memocode.user_server.domain.user.mapper.UserMapper;
 import dev.memocode.user_server.domain.user.repository.UserRepository;
-import dev.memocode.user_server.exception.GlobalException;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
+import dev.memocode.user_server.usecase.UserUseCase;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
@@ -14,22 +17,24 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import static dev.memocode.user_server.exception.GlobalErrorCode.*;
+import static dev.memocode.user_server.domain.exception.GlobalErrorCode.USER_ALREAY_EXISTS;
+import static dev.memocode.user_server.domain.exception.GlobalErrorCode.USER_USERNAME_ALREAY_EXISTS;
 
 @Service
 @Validated
 @RequiredArgsConstructor
-public class UserService {
+public class UserService implements UserUseCase {
 
     private final UserRepository userRepository;
 
-    public Optional<User> findByUsername(String username) {
-        return userRepository.findByUsername(username);
-    }
+    private final ApplicationEventPublisher eventPublisher;
 
-    public User createUser(@Valid UserCreateDTO dto) {
+    private final UserMapper userMapper;
 
-        if (isJoined(dto.getAccountId())) {
+    @Override
+    public UUID createUser(UserCreateDTO dto) {
+
+        if (isJoined(dto.getUserId())) {
             throw new GlobalException(USER_ALREAY_EXISTS);
         }
 
@@ -38,34 +43,49 @@ public class UserService {
         }
 
         User user = User.builder()
+                .id(dto.getUserId())
                 .username(dto.getUsername())
                 .nickname(dto.getNickname())
-                .accountId(dto.getAccountId())
                 .build();
 
-        return userRepository.save(user);
+        User savedUser = userRepository.save(user);
+
+        // USER_CREATED 이벤트 발생
+        UserCreatedEvent userCreatedEvent = UserCreatedEvent.builder()
+                .userId(user.getId())
+                .username(user.getUsername())
+                .nickname(user.getNickname())
+                .build();
+        eventPublisher.publishEvent(userCreatedEvent);
+
+        return savedUser.getId();
+    }
+
+    @Override
+    public UserInfo userInfo(UUID userId) {
+        return null;
+    }
+
+    @Override
+    public List<UserInfo> findAll() {
+        List<User> users = userRepository.findAll();
+
+        return userMapper.entityToUserInfo(users);
     }
 
     private boolean isJoined(UUID accountId) {
-        return findByAccountId(accountId).isPresent();
+        return findById(accountId).isPresent();
     }
 
     private boolean isAlreadyUsername(String username) {
         return findByUsername(username).isPresent();
     }
 
-    public Optional<User> findByAccountId(
-            @NotNull(message = "ACCOUNT_ID_NOT_NULL:accountId must not be null") UUID accountId) {
-        return userRepository.findByAccountId(accountId);
+    public Optional<User> findByUsername(String username) {
+        return userRepository.findByUsername(username);
     }
 
-    public User findByAccountIdElseThrow(
-            @NotNull(message = "ACCOUNT_ID_NOT_NULL:accountId must not be null") UUID accountId) {
-        return findByAccountId(accountId)
-                .orElseThrow(() -> new GlobalException(USER_NOT_FOUND));
-    }
-
-    public List<User> findAll() {
-        return userRepository.findAll();
+    private Optional<User> findById(UUID userId) {
+        return userRepository.findById(userId);
     }
 }

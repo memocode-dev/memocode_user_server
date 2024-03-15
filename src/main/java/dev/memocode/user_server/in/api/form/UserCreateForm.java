@@ -1,22 +1,12 @@
-package dev.memocode.user_server.domain.user.dto;
+package dev.memocode.user_server.in.api.form;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import java.util.UUID;
 
 @Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class UserCreateDTO {
-    @NotNull(message = "USER_ID_NOT_NULL:userId must not be null")
-    private UUID userId;
+public class UserCreateForm {
 
     @NotNull(message = "USERNAME_NOT_NULL:Username must not be null")
     @Size(min = 4, max = 20, message = "USERNAME_SIZE:Username must be between 4 and 20 characters")
