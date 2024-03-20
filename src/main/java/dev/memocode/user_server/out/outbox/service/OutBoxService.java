@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
+import java.util.UUID;
+
 @Slf4j
 @Service
 @Transactional
@@ -21,6 +23,7 @@ public class OutBoxService {
 
     public OutBox createOutBox(@Valid OutBoxCreateDTO dto) {
         OutBox outbox = OutBox.builder()
+                .id(UUID.randomUUID())
                 .aggregateId(dto.getAggregateId())
                 .aggregateType(dto.getAggregateType())
                 .eventType(dto.getEventType())
