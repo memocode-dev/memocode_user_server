@@ -1,3 +1,4 @@
+# application.yml을 수정하지 마세요.
 server:
   port: 9003
 
@@ -9,8 +10,8 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: "SECRET"
-    username: "SECRET"
-    password: "SECRET"
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
   jpa:
     hibernate:
       ddl-auto: validate
@@ -31,12 +32,6 @@ custom:
   front:
     domain: "SECRET"
     domain2: "SECRET"
-  api:
-    domain: "SECRET"
-  auth:
-    domain: "SECRET"
-    client-id: "SECRET"
-    client-secret: "SECRET"
 
 ########## LOGGING ##########
 logging:
@@ -48,11 +43,6 @@ decorator:
   datasource:
     p6spy:
       enable-logging: false
-
-########## JASYPT ##########
-jasypt:
-  encryptor:
-    password: "SECRET"
 
 ########## springdoc ##########
 springdoc:
