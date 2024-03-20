@@ -31,7 +31,6 @@ public abstract class BaseEntity {
 
     @Id
     @EqualsAndHashCode.Include
-    @UuidGenerator(style = RANDOM)
     @JdbcTypeCode(SqlTypes.CHAR)
     @Column(name = "id")
     private UUID id;
